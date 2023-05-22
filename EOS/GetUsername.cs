@@ -9,5 +9,6 @@ namespace EOS
     public class GetUsername
     {
         public static string Userloggedname { get; set; }
+        public static string Userchangepass { get; set; }
     }
 }

@@ -89,12 +89,14 @@
             this.switchAccountToolStripMenuItem1.Name = "switchAccountToolStripMenuItem1";
             this.switchAccountToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.switchAccountToolStripMenuItem1.Text = "Switch Account";
+            this.switchAccountToolStripMenuItem1.Click += new System.EventHandler(this.switchAccountToolStripMenuItem1_Click);
             // 
             // deleteAccountToolStripMenuItem1
             // 
             this.deleteAccountToolStripMenuItem1.Name = "deleteAccountToolStripMenuItem1";
             this.deleteAccountToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.deleteAccountToolStripMenuItem1.Text = "Delete Account";
+            this.deleteAccountToolStripMenuItem1.Click += new System.EventHandler(this.deleteAccountToolStripMenuItem1_Click);
             // 
             // stocksToolStripMenuItem
             // 
@@ -118,6 +120,7 @@
             this.outToolStripMenuItem.Name = "outToolStripMenuItem";
             this.outToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.outToolStripMenuItem.Text = "Out";
+            this.outToolStripMenuItem.Click += new System.EventHandler(this.outToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -142,7 +145,7 @@
             // stocksToolStripMenuItem1
             // 
             this.stocksToolStripMenuItem1.Name = "stocksToolStripMenuItem1";
-            this.stocksToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.stocksToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.stocksToolStripMenuItem1.Text = "Stocks";
             this.stocksToolStripMenuItem1.Click += new System.EventHandler(this.stocksToolStripMenuItem1_Click);
             // 

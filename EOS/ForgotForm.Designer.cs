@@ -28,34 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.changeUsertxtbox = new System.Windows.Forms.TextBox();
-            this.changePasstxtbox = new System.Windows.Forms.TextBox();
+            this.forgotUsertxtbox = new System.Windows.Forms.TextBox();
+            this.forgotPasstxtbox = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.changeButton = new System.Windows.Forms.Button();
+            this.forgotButton = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.changeConfirmpasstxtbox = new System.Windows.Forms.TextBox();
+            this.forgotConfirmpasstxtbox = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(291, 42);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "Change my passsowrd";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox2
             // 
@@ -72,23 +56,23 @@
             this.textBox2.Text = "UserName :";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // changeUsertxtbox
+            // forgotUsertxtbox
             // 
-            this.changeUsertxtbox.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changeUsertxtbox.Location = new System.Drawing.Point(145, 60);
-            this.changeUsertxtbox.Multiline = true;
-            this.changeUsertxtbox.Name = "changeUsertxtbox";
-            this.changeUsertxtbox.Size = new System.Drawing.Size(158, 29);
-            this.changeUsertxtbox.TabIndex = 1;
+            this.forgotUsertxtbox.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forgotUsertxtbox.Location = new System.Drawing.Point(145, 60);
+            this.forgotUsertxtbox.Multiline = true;
+            this.forgotUsertxtbox.Name = "forgotUsertxtbox";
+            this.forgotUsertxtbox.Size = new System.Drawing.Size(158, 29);
+            this.forgotUsertxtbox.TabIndex = 1;
             // 
-            // changePasstxtbox
+            // forgotPasstxtbox
             // 
-            this.changePasstxtbox.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changePasstxtbox.Location = new System.Drawing.Point(145, 109);
-            this.changePasstxtbox.Name = "changePasstxtbox";
-            this.changePasstxtbox.PasswordChar = '*';
-            this.changePasstxtbox.Size = new System.Drawing.Size(158, 32);
-            this.changePasstxtbox.TabIndex = 2;
+            this.forgotPasstxtbox.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forgotPasstxtbox.Location = new System.Drawing.Point(145, 109);
+            this.forgotPasstxtbox.Name = "forgotPasstxtbox";
+            this.forgotPasstxtbox.PasswordChar = '*';
+            this.forgotPasstxtbox.Size = new System.Drawing.Size(158, 32);
+            this.forgotPasstxtbox.TabIndex = 2;
             // 
             // textBox4
             // 
@@ -116,15 +100,15 @@
             this.linkLabel1.Text = "Close";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // changeButton
+            // forgotButton
             // 
-            this.changeButton.Location = new System.Drawing.Point(104, 275);
-            this.changeButton.Name = "changeButton";
-            this.changeButton.Size = new System.Drawing.Size(98, 35);
-            this.changeButton.TabIndex = 6;
-            this.changeButton.Text = "Submit";
-            this.changeButton.UseVisualStyleBackColor = true;
-            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
+            this.forgotButton.Location = new System.Drawing.Point(104, 275);
+            this.forgotButton.Name = "forgotButton";
+            this.forgotButton.Size = new System.Drawing.Size(98, 35);
+            this.forgotButton.TabIndex = 6;
+            this.forgotButton.Text = "Submit";
+            this.forgotButton.UseVisualStyleBackColor = true;
+            this.forgotButton.Click += new System.EventHandler(this.changeButton_Click);
             // 
             // textBox3
             // 
@@ -154,15 +138,15 @@
             this.textBox6.Text = "Confirm Password :";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // changeConfirmpasstxtbox
+            // forgotConfirmpasstxtbox
             // 
-            this.changeConfirmpasstxtbox.Font = new System.Drawing.Font("Cambria", 15.75F);
-            this.changeConfirmpasstxtbox.Location = new System.Drawing.Point(145, 167);
-            this.changeConfirmpasstxtbox.Multiline = true;
-            this.changeConfirmpasstxtbox.Name = "changeConfirmpasstxtbox";
-            this.changeConfirmpasstxtbox.PasswordChar = '*';
-            this.changeConfirmpasstxtbox.Size = new System.Drawing.Size(158, 30);
-            this.changeConfirmpasstxtbox.TabIndex = 4;
+            this.forgotConfirmpasstxtbox.Font = new System.Drawing.Font("Cambria", 15.75F);
+            this.forgotConfirmpasstxtbox.Location = new System.Drawing.Point(145, 167);
+            this.forgotConfirmpasstxtbox.Multiline = true;
+            this.forgotConfirmpasstxtbox.Name = "forgotConfirmpasstxtbox";
+            this.forgotConfirmpasstxtbox.PasswordChar = '*';
+            this.forgotConfirmpasstxtbox.Size = new System.Drawing.Size(158, 30);
+            this.forgotConfirmpasstxtbox.TabIndex = 4;
             // 
             // checkBox1
             // 
@@ -193,38 +177,35 @@
             this.ClientSize = new System.Drawing.Size(315, 344);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.changeConfirmpasstxtbox);
+            this.Controls.Add(this.forgotConfirmpasstxtbox);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.changeButton);
+            this.Controls.Add(this.forgotButton);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.changePasstxtbox);
-            this.Controls.Add(this.changeUsertxtbox);
+            this.Controls.Add(this.forgotPasstxtbox);
+            this.Controls.Add(this.forgotUsertxtbox);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ForgotForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EOS";
+            this.Text = "Forgot my password";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox changeUsertxtbox;
-        private System.Windows.Forms.TextBox changePasstxtbox;
+        private System.Windows.Forms.TextBox forgotUsertxtbox;
+        private System.Windows.Forms.TextBox forgotPasstxtbox;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button changeButton;
+        private System.Windows.Forms.Button forgotButton;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox changeConfirmpasstxtbox;
+        private System.Windows.Forms.TextBox forgotConfirmpasstxtbox;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
     }

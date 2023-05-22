@@ -14,10 +14,10 @@ namespace EOS
 
         private void changeButton_Click(object sender, EventArgs e)
         {
-            bool a = changeConfirmpasstxtbox.Text == changePasstxtbox.Text;
+            bool a = forgotConfirmpasstxtbox.Text == forgotPasstxtbox.Text;
             if (a == true)
             {
-                bool b = CheckPassword.ValidatePassword(changePasstxtbox.Text);
+                bool b = CheckPassword.ValidatePassword(forgotPasstxtbox.Text);
                 if (b == true)            
                 {
                     SqlConnection sqlcon = ConnectUser.GetUserSqlcon();           
@@ -25,7 +25,7 @@ namespace EOS
                         sqlcon.Open();                    
                         // Current password is correct, allow user to change password                    
                         string hashedNewPassword =
-                            CryptPassword.GetMd5Hash(changePasstxtbox.Text);                    
+                            CryptPassword.GetMd5Hash(forgotPasstxtbox.Text);                    
                         // Store the hashed password in the database                    
                         using (SqlCommand updateCmd = new SqlCommand(
                             "UPDATE tbl_Login SET Password = @password WHERE " +
@@ -34,7 +34,7 @@ namespace EOS
                             updateCmd.Parameters.AddWithValue(
                                 "@password", hashedNewPassword);                        
                             updateCmd.Parameters.AddWithValue(
-                                "@username", changeUsertxtbox.Text);                        
+                                "@username", forgotUsertxtbox.Text);                        
                             updateCmd.ExecuteNonQuery();
                         }
                     }
@@ -61,12 +61,12 @@ namespace EOS
         {
             if (checkBox1.Checked)
             {
-                changePasstxtbox.PasswordChar = '\0'; 
+                forgotPasstxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
             else
             {
-                changePasstxtbox.PasswordChar = '*'; 
+                forgotPasstxtbox.PasswordChar = '*'; 
                 // hide password
             }
         }
@@ -75,12 +75,12 @@ namespace EOS
         {
             if (checkBox2.Checked)
             {
-                changeConfirmpasstxtbox.PasswordChar = '\0'; 
+                forgotConfirmpasstxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
             else
             {
-                changeConfirmpasstxtbox.PasswordChar = '*'; 
+                forgotConfirmpasstxtbox.PasswordChar = '*'; 
                 // hide password
             }
         }

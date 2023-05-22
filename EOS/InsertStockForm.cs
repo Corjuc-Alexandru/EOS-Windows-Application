@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace EOS
 {
-    public partial class InsertStock : Form
+    public partial class InsertStockForm : Form
     {
-        public InsertStock()
+        public InsertStockForm()
         {
             InitializeComponent();
             comboBox2.SelectedIndex = 0;

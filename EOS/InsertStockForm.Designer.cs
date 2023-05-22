@@ -1,6 +1,6 @@
 ﻿namespace EOS
 {
-    partial class InsertStock
+    partial class InsertStockForm
     {
         /// <summary>
         /// Required designer variable.

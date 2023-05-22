@@ -47,13 +47,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sql_Connections\CountStockId.cs" />
-    <Compile Include="GetUsername.cs" />
-    <Compile Include="InsertStock.cs">
+    <Compile Include="ChangePassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InsertStock.Designer.cs">
-      <DependentUpon>InsertStock.cs</DependentUpon>
+    <Compile Include="ChangePassForm.Designer.cs">
+      <DependentUpon>ChangePassForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteAccountForm.Designer.cs">
+      <DependentUpon>DeleteAccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditStockForm.Designer.cs">
+      <DependentUpon>EditStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql_Connections\CountStockId.cs" />
+    <Compile Include="GetUsername.cs" />
+    <Compile Include="InsertStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertStockForm.Designer.cs">
+      <DependentUpon>InsertStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql_Connections\ConnectStock.cs" />
     <Compile Include="Sql_Connections\CountUserId.cs" />
@@ -92,14 +116,26 @@
     <Compile Include="StocksForm.Designer.cs">
       <DependentUpon>StocksForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangePassForm.resx">
+      <DependentUpon>ChangePassForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteAccountForm.resx">
+      <DependentUpon>DeleteAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ForgotForm.resx">
       <DependentUpon>ForgotForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InsertStock.resx">
-      <DependentUpon>InsertStock.cs</DependentUpon>
+    <EmbeddedResource Include="InsertStockForm.resx">
+      <DependentUpon>InsertStockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditStockForm.resx">
+      <DependentUpon>EditStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
