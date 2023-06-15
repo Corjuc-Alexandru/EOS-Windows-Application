@@ -53,6 +53,7 @@
     <Compile Include="ChangePassForm.Designer.cs">
       <DependentUpon>ChangePassForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Command\CheckExist.cs" />
     <Compile Include="DeleteAccountForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,7 +74,7 @@
     </Compile>
     <Compile Include="Sql_Connections\ConnectSQL.cs" />
     <Compile Include="Sql_Connections\CountStockId.cs" />
-    <Compile Include="GetUsername.cs" />
+    <Compile Include="Command\GetUsername.cs" />
     <Compile Include="InsertStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
