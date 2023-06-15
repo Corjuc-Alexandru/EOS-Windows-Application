@@ -93,8 +93,6 @@ namespace EOS
                                     command.ExecuteNonQuery();
                                 }
                             }
-
-
                             using (SqlConnection userconnection = ConnectUser.GetUserSqlcon())
                             {
                                 userconnection.Open();
@@ -157,10 +155,6 @@ namespace EOS
                                 SqlCommand createTableCommand =
                                     new SqlCommand(createStockTable, stockSqlCon);
                                 createTableCommand.ExecuteNonQuery();
-                                /*// Grant INSERT permission to a user or role
-                                createTableCommand = new SqlCommand($"GRANT INSERT " +
-                                    $"ON dbo.{tableName} TO public", stockSqlCon);
-                                createTableCommand.ExecuteNonQuery();*/
                                 stockSqlCon.Close();
                             }
                             MessageBox.Show("SignIn succesful!");
