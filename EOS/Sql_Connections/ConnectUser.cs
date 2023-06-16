@@ -14,7 +14,7 @@ namespace EOS
         public static SqlConnection GetUserSqlcon()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;" +
-            @"AttachDbFilename=C:\Users\alexd\source\repos\EOS\EOS\bin\Debug\" +
+            @"AttachDbFilename=" + AppDomain.CurrentDomain.BaseDirectory + @"\Database\" +
             @"users.mdf;Connect Timeout=30");
         }
 

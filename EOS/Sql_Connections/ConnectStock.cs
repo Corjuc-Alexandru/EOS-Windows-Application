@@ -12,7 +12,7 @@ namespace EOS
         public static SqlConnection GetStockSqlcon()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;" +
-            @"AttachDbFilename=C:\Users\alexd\source\repos\EOS\EOS\Database\" +
+            @"AttachDbFilename=" + AppDomain.CurrentDomain.BaseDirectory + @"\Database\" +
             @"stocks.mdf;Connect Timeout=30");
         }
     }

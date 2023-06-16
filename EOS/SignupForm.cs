@@ -63,37 +63,52 @@ namespace EOS
                 bool b = CheckPassword.ValidatePassword(signupPasstxtbox.Text);
                 if (b == true)
                 {
+                    string folderpath = AppDomain.CurrentDomain.BaseDirectory + 
+                        @"\Database";
+                    if (!Directory.Exists(folderpath))
+                    {
+                        Directory.CreateDirectory(folderpath);
+                    }
                     CheckExist checker = new CheckExist();
                     bool c = checker.IsUserDatabaseExists();
-                    if (!c)
+                    bool d = checker.IsStocksDatabaseExist();
+                    if (!c && !d)
                     {
                         // Create a new SQL connection
                         using (SqlConnection connectionSql = ConnectSQL.GetSqlcon())
                         {
                             // Create the database
                             string databaseName = "users";
-                            string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                            MessageBox.Show(appDirectory);
-
-                            // Concatenează calea directorului de instalare cu numele fișierelor bazei de date
-                            string databaseFilePath = Path.Combine(appDirectory, "users.mdf");
-                            string databaseLogFilePath = Path.Combine(appDirectory, "users_log.ldf");
-
-                            // Comanda de creare a bazei de date
-                            string createDatabaseQuery = $"CREATE DATABASE {databaseName} " +
-                                $"ON (NAME = '{databaseName}', FILENAME = '{databaseFilePath}') " +
-                                $"LOG ON (NAME = '{databaseName}_log', FILENAME = '{databaseLogFilePath}')";
-
-                            // Utilizează conexiunea SQL pentru a crea baza de date
+                            string stockdatabase = "stocks";
+                            string databaseFilePath = 
+                                Path.Combine(folderpath, "users.mdf");
+                            string stockdatabaseFilePath =
+                                Path.Combine(folderpath, "stocks.mdf");
+                            string databaseLogFilePath = 
+                                Path.Combine(folderpath, "users_log.ldf");
+                            string stockdatabaseLogFilePath =
+                                Path.Combine(folderpath, "stocks_log.ldf");
+                            string createDatabaseQuery =
+                                $"CREATE DATABASE {databaseName} ON (NAME = " +
+                                $"'{databaseName}', FILENAME = '{databaseFilePath}') " +
+                                $"LOG ON (NAME = '{databaseName}_log', " +
+                                $"FILENAME = '{databaseLogFilePath}') " +
+                                $"CREATE DATABASE {stockdatabase} ON (NAME = " +
+                                $"'{stockdatabase}', FILENAME = " +
+                                $"'{stockdatabaseFilePath}') " +
+                                $"LOG ON (NAME = '{stockdatabase}_log', FILENAME = " +
+                                $"'{stockdatabaseLogFilePath}')";
                             using (SqlConnection connection = ConnectSQL.GetSqlcon())
                             {
-                                using (SqlCommand command = new SqlCommand(createDatabaseQuery, connection))
+                                using (SqlCommand command = 
+                                    new SqlCommand(createDatabaseQuery, connection))
                                 {
                                     connection.Open();
                                     command.ExecuteNonQuery();
                                 }
                             }
-                            using (SqlConnection userconnection = ConnectUser.GetUserSqlcon())
+                            using (SqlConnection userconnection = 
+                                ConnectUser.GetUserSqlcon())
                             {
                                 userconnection.Open();
                                 // Create the user login table in the database
@@ -120,8 +135,8 @@ namespace EOS
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
                             // Create a new SQL connection to User database
-                            string insertUser = "INSERT INTO tbl_Login(loginId, username, "
-                                + "password) VALUES ('" + id + "','"
+                            string insertUser = "INSERT INTO tbl_Login(loginId, " +
+                                "username, password) VALUES ('" + id + "','"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
                             SqlConnection userSqlCon = ConnectUser.GetUserSqlcon();
                             {
@@ -147,7 +162,8 @@ namespace EOS
                                 string columnPrice = "Price";
                                 string columnDate = "Date";
                                 // create SQL query to create table
-                                string createStockTable = $"CREATE TABLE {tableName} ({columnID} " +
+                                string createStockTable = $"CREATE TABLE " +
+                                    $"{tableName} ({columnID} " +
                                     $"INT PRIMARY KEY, {columnInventory} " +
                                     $"VARCHAR(50), {columnItem} VARCHAR(50), {columnUM} " +
                                     $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
@@ -176,8 +192,8 @@ namespace EOS
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
                             // Create a new SQL connection to User database
-                            string insertUser = "INSERT INTO tbl_Login(loginId, username, "
-                                + "password) VALUES ('" + id + "','"
+                            string insertUser = "INSERT INTO tbl_Login(loginId, " +
+                                "username, password) VALUES ('" + id + "','"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
                             SqlConnection userSqlCon = ConnectUser.GetUserSqlcon();
                             {
@@ -203,7 +219,8 @@ namespace EOS
                                 string columnPrice = "Price";
                                 string columnDate = "Date";
                                 // create SQL query to create table
-                                string createStockTable = $"CREATE TABLE {tableName} ({columnID} " +
+                                string createStockTable = $"CREATE TABLE " +
+                                    $"{tableName} ({columnID} " +
                                     $"INT PRIMARY KEY, {columnInventory} " +
                                     $"VARCHAR(50), {columnItem} VARCHAR(50), {columnUM} " +
                                     $"VARCHAR(10), {columnQty} INT, {columnPrice} " +

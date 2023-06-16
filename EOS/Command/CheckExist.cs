@@ -26,5 +26,20 @@ namespace EOS.Command
                 }
             }
         }
+        public bool IsStocksDatabaseExist()
+        {
+            string databaseName = "stocks";
+            string query = "SELECT COUNT(*) FROM sys.databases WHERE name = @Name";
+            using (SqlConnection connection = ConnectSQL.GetSqlcon())
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", databaseName);
+                    connection.Open();
+                    int databaseCount = (int)command.ExecuteScalar();
+                    return databaseCount > 0;
+                }
+            }
+        }
     }
 }
