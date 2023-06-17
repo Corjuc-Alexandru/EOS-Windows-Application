@@ -181,7 +181,7 @@
             this.insertDatepicker.Location = new System.Drawing.Point(172, 181);
             this.insertDatepicker.Name = "insertDatepicker";
             this.insertDatepicker.Size = new System.Drawing.Size(93, 20);
-            this.insertDatepicker.TabIndex = 13;
+            this.insertDatepicker.TabIndex = 5;
             // 
             // InsertStockForm
             // 

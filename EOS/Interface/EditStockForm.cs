@@ -25,11 +25,10 @@ namespace EOS
         private void EditStockForm_Load(object sender, EventArgs e)
         {
 
-            string tablename = GetUsername.Userloggedname;
+            string tablename = "Home";
             SqlConnection connection = ConnectUserStock.GetStockSqlcon();
             connection.Open();
-            string columnName1 = "Inventory";
-            string query = $"SELECT DISTINCT {columnName1} FROM {tablename}";
+            string query = $"SELECT * FROM {tablename}";
             SqlCommand command = new SqlCommand(query, connection);
             SqlDataReader reader1 = command.ExecuteReader();
 
@@ -39,7 +38,7 @@ namespace EOS
             comboBoxColumn1.Name = "Inventory";
             while (reader1.Read())
             {
-                string value = reader1[columnName1].ToString();
+                string value = reader1[tablename].ToString();
                 comboBoxColumn1.Items.Add(value);
             }
             // Adăugarea obiectului DataGridViewComboBoxColumn la DataGridView

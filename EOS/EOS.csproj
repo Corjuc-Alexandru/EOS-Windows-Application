@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Inventory.cs" />
     <Compile Include="Interface\ChangePassForm.cs">
       <SubType>Form</SubType>
     </Compile>

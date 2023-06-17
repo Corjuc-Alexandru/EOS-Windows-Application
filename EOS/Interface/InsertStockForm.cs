@@ -17,14 +17,16 @@ namespace EOS
         public InsertStockForm()
         {
             InitializeComponent();
-            comboBox2.SelectedIndex = 0;
             comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
         }
 
         private void insertButton_Click(object sender, EventArgs e)
         {
             string insertUnits = comboBox2.SelectedItem.ToString();
             string tableName = comboBox1.SelectedItem.ToString();
+            string price = insertPricetxtbox.Text;
+            decimal valueprice = decimal.Parse(price);
 
             string query1 = $"INSERT INTO [{tableName}] (Item, UM, Qty, Price, Date) " +
                             "VALUES (@Item, @UM, @Qty, @Price, @Date)";
@@ -36,7 +38,7 @@ namespace EOS
                 command.Parameters.AddWithValue("@Item", insertNametxtbox.Text);
                 command.Parameters.AddWithValue("@UM", insertUnits);
                 command.Parameters.AddWithValue("@Qty", insertQtytxtbox.Text);
-                command.Parameters.AddWithValue("@Price", insertPricetxtbox.Text);
+                command.Parameters.AddWithValue("@Price", valueprice);
 
                 // Setarea valorii pentru parametrul @Date
                 DateTime selectedDate = insertDatepicker.Value.Date;
@@ -49,6 +51,10 @@ namespace EOS
             }
 
             MessageBox.Show("Was successfully entered!");
+            insertNametxtbox.Clear();
+            insertQtytxtbox.Clear();
+            insertPricetxtbox.Clear();
+            insertDatepicker.Refresh();
         }
     }
 }

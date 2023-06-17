@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using EOS.Command;
 
 namespace EOS
 {
@@ -12,19 +14,40 @@ namespace EOS
         {
             InitializeComponent();
         }
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private void StocksForm_Load(object sender, EventArgs e)
         {
-            string tablename = "Home";
-            string tablename2 = "Work";
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedOption = comboBox1.SelectedItem.ToString();
+            string sqlQuery = string.Empty;
+
+            if (selectedOption == "All")
+            {
+                Inventory inventory = new Inventory();
+                sqlQuery = inventory.All();
+            }
+            else if (selectedOption == "Home")
+            {
+                Inventory inventory = new Inventory();
+                sqlQuery = inventory.Home();
+            }
+            else if (selectedOption == "Work")
+            {
+                Inventory inventory = new Inventory();
+                sqlQuery = inventory.Work();
+            }
+
+            // Ștergeți coloanele existente din DataGridView
+            dataGridView1.Columns.Clear();
+
+            // Utilizați sqlQuery pentru a accesa baza de date și afișa rezultatele în DataGridView
+
             SqlConnection conn = ConnectUserStock.GetStockSqlcon();
-            string selectAll = $"SELECT *, '{tablename}' AS Inventory FROM {tablename} " +
-                $"UNION ALL SELECT *, '{tablename2}' AS Inventory FROM {tablename2}";
-            SqlCommand command = new SqlCommand(selectAll, conn);
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
             conn.Open();
             SqlDataReader reader = command.ExecuteReader();
 
