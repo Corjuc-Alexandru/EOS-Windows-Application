@@ -73,7 +73,6 @@
       <DependentUpon>PasswordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql_Connections\ConnectSQL.cs" />
-    <Compile Include="Sql_Connections\CountUserStockId.cs" />
     <Compile Include="Command\GetUsername.cs" />
     <Compile Include="Interface\InsertStockForm.cs">
       <SubType>Form</SubType>
@@ -82,7 +81,6 @@
       <DependentUpon>InsertStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql_Connections\ConnectUserStock.cs" />
-    <Compile Include="Sql_Connections\CountLoginId.cs" />
     <Compile Include="Sql_Connections\ConnectLogin.cs" />
     <Compile Include="Password_Syntax\CheckPassword.cs" />
     <Compile Include="Password_Syntax\CryptPassword.cs" />

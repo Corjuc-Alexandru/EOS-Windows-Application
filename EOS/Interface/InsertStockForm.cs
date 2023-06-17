@@ -23,19 +23,19 @@ namespace EOS
 
         private void insertButton_Click(object sender, EventArgs e)
         {
-            int id = CountUserStockId.B() + 1;
+            //int id = CountUserStockId.Home() + 1;
             string insertUnits = comboBox2.SelectedItem.ToString();
             string tableName = comboBox1.SelectedItem.ToString();
             //create instanace of database connection
-            string query1 = $"INSERT INTO [{tableName}] (ID, Item, " +
-                $"UM, Qty, Price, Date) VALUES (@ID, @Item," +
+            string query1 = $"INSERT INTO [{tableName}] (Item, " +
+                $"UM, Qty, Price, Date) VALUES (@Item," +
                 $" @UM, @Qty, @Price, @Date)";
             SqlConnection sqlcon = ConnectUserStock.GetStockSqlcon();
             {
                 SqlCommand command = new SqlCommand(query1, sqlcon);
                 {
                     // set parameter values
-                    command.Parameters.AddWithValue("@ID", id);
+                   // command.Parameters.AddWithValue("@ID", id);
                     command.Parameters.AddWithValue("@Item",insertNametxtbox.Text);
                     command.Parameters.AddWithValue("@UM", insertUnits);
                     command.Parameters.AddWithValue("@Qty", insertQtytxtbox.Text);

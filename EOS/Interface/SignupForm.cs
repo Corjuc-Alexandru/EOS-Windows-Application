@@ -111,7 +111,7 @@ namespace EOS
                                 userconnection.Open();
                                 // Create the user login table in the database
                                 string createTableQuery = "CREATE TABLE tbl_Login " +
-                                    "(loginId INT PRIMARY KEY, username NVARCHAR(50), " +
+                                    "(loginId INT IDENTITY (1,1) PRIMARY KEY, username NVARCHAR(50), " +
                                     "password NVARCHAR(50))";
                                 using (SqlCommand createTable =
                                 new SqlCommand(createTableQuery, userconnection))
@@ -120,8 +120,6 @@ namespace EOS
                                 }
                             }
                         }
-                        //get unique id to set it into database
-                        int id = CountLoginId.A() + 1;
                         bool checkuser = checker.IsUserExists();
                         if (checkuser)
                         {
@@ -134,8 +132,8 @@ namespace EOS
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
                             // Create a new SQL connection to User database
-                            string insertUser = "INSERT INTO tbl_Login(loginId, " +
-                                "username, password) VALUES ('" + id + "','"
+                            string insertUser = "INSERT INTO tbl_Login(" +
+                                "username, password) VALUES ('"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
                             SqlConnection userSqlCon = ConnectLogin.GetLoginSqlcon();
                             {
@@ -163,12 +161,12 @@ namespace EOS
                                 // create SQL query to create table
                                 string createStockTable = $"CREATE TABLE " +
                                     $"{tableName} ({columnID} " +
-                                    $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
                                     $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                     $"DECIMAL(10,2), {columnDate} DATE);" +
                                     $"CREATE TABLE " +
                                     $"{tableName2} ({columnID} " +
-                                    $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
                                     $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                     $"DECIMAL(10,2), {columnDate} DATE);";
                                 SqlCommand createTableCommand =
@@ -182,8 +180,6 @@ namespace EOS
                     }
                     else
                     {
-                        //get unique id to set it into database
-                        int id = CountLoginId.A() + 1;
                         bool checkuser = checker.IsUserExists();
                         if (checkuser)
                         {
@@ -196,8 +192,8 @@ namespace EOS
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
                             // Create a new SQL connection to User database
-                            string insertUser = "INSERT INTO tbl_Login(loginId, " +
-                                "username, password) VALUES ('" + id + "','"
+                            string insertUser = "INSERT INTO tbl_Login(" +
+                                "username, password) VALUES ('"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
                             SqlConnection userSqlCon = ConnectLogin.GetLoginSqlcon();
                             {
@@ -249,12 +245,12 @@ namespace EOS
                                     // create SQL query to create table
                                     string createStockTable = $"CREATE TABLE " +
                                         $"{tableName} ({columnID} " +
-                                        $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
                                         $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                         $"DECIMAL(10,2), {columnDate} DATE);" +
                                         $"CREATE TABLE " +
                                         $"{tableName2} ({columnID} " +
-                                        $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
                                         $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                         $"DECIMAL(10,2), {columnDate} DATE);";
                                     SqlCommand createTableCommand =

@@ -183,7 +183,7 @@
             this.insertDatepicker.Size = new System.Drawing.Size(93, 20);
             this.insertDatepicker.TabIndex = 13;
             // 
-            // InsertStock
+            // InsertStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -202,10 +202,9 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.comboBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "InsertStock";
+            this.Name = "InsertStockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InsertStock";
-            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 
