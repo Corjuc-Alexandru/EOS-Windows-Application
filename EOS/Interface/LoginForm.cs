@@ -51,7 +51,7 @@ namespace EOS
             string inputPassword = loginPasswordtxtbox.Text;
             string hashedInputPassword = CryptPassword.GetMd5Hash(inputPassword);
             //create instanace of database connection
-            SqlConnection sqlcon1 = ConnectUser.GetUserSqlcon();
+            SqlConnection sqlcon1 = ConnectLogin.GetLoginSqlcon();
             string querry = "Select * from tbl_Login Where username = '" 
                 + loginUsertxtbox.Text + "' and password = '" 
                 + hashedInputPassword + "'";

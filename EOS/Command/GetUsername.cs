@@ -10,5 +10,6 @@ namespace EOS
     {
         public static string Userloggedname { get; set; }
         public static string Userchangepass { get; set; }
+        public static string userSignUp { get; set; }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EOS
 {
-    internal class CountUserId
+    internal class CountLoginId
     {
         public static int A()
         {
             string stmt = "SELECT COUNT(*) FROM tbl_Login";
-            SqlConnection thisConnection = ConnectUser.GetUserSqlcon();
+            SqlConnection thisConnection = ConnectLogin.GetLoginSqlcon();
             int count;
             {
                 SqlCommand cmdCount = new SqlCommand(stmt, thisConnection);

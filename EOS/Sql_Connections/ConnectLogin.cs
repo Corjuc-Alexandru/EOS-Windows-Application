@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace EOS
 {
-    internal class ConnectUser
+    internal class ConnectLogin
     {
-        public static SqlConnection GetUserSqlcon()
+        public static SqlConnection GetLoginSqlcon()
         {
             return new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;" +
-            @"AttachDbFilename=" + AppDomain.CurrentDomain.BaseDirectory + @"\Database\" +
+            @"AttachDbFilename=" + AppDomain.CurrentDomain.BaseDirectory + @"Database\" +
             @"users.mdf;Connect Timeout=30");
         }
 

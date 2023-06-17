@@ -23,7 +23,7 @@ namespace EOS
             bool a = newpasstxtbox.Text == confirmpasstxtbox.Text;
             if (a == true)
             {
-                SqlConnection sqlcon = ConnectUser.GetUserSqlcon();
+                SqlConnection sqlcon = ConnectLogin.GetLoginSqlcon();
                 {
                     sqlcon.Open();
                     // allow user to change password                    

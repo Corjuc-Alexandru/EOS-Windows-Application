@@ -23,7 +23,7 @@ namespace EOS
 
         private void insertButton_Click(object sender, EventArgs e)
         {
-            int id = CountStockId.B() + 1;
+            int id = CountUserStockId.B() + 1;
             string insertUnits = comboBox2.SelectedItem.ToString();
             string insertInventory = comboBox1.SelectedItem.ToString();
             string tableName = GetUsername.Userloggedname;
@@ -31,7 +31,7 @@ namespace EOS
             string query1 = $"INSERT INTO [{tableName}] (ID, Inventory, Item, " +
                 $"UM, Qty, Price, Date) VALUES (@ID, @Inventory, @Item," +
                 $" @UM, @Qty, @Price, @Date)";
-            SqlConnection sqlcon = ConnectStock.GetStockSqlcon();
+            SqlConnection sqlcon = ConnectUserStock.GetStockSqlcon();
             {
                 SqlCommand command = new SqlCommand(query1, sqlcon);
                 {

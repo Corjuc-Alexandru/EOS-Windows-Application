@@ -20,7 +20,7 @@ namespace EOS
                 bool b = CheckPassword.ValidatePassword(forgotPasstxtbox.Text);
                 if (b == true)            
                 {
-                    SqlConnection sqlcon = ConnectUser.GetUserSqlcon();           
+                    SqlConnection sqlcon = ConnectLogin.GetLoginSqlcon();           
                     {                    
                         sqlcon.Open();                    
                         // Current password is correct, allow user to change password                    

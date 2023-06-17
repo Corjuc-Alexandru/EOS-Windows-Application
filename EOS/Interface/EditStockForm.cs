@@ -26,7 +26,7 @@ namespace EOS
         {
 
             string tablename = GetUsername.Userloggedname;
-            SqlConnection connection = ConnectStock.GetStockSqlcon();
+            SqlConnection connection = ConnectUserStock.GetStockSqlcon();
             connection.Open();
             string columnName1 = "Inventory";
             string query = $"SELECT DISTINCT {columnName1} FROM {tablename}";
@@ -108,7 +108,7 @@ namespace EOS
                     // Adăugați valorile corespunzătoare din baza de date
                     // în comboBoxCell2.Items
                     string tablename = GetUsername.Userloggedname;
-                    SqlConnection connection = ConnectStock.GetStockSqlcon();
+                    SqlConnection connection = ConnectUserStock.GetStockSqlcon();
                     connection.Open();
 
                     string columnName2 = "Item";
@@ -146,7 +146,7 @@ namespace EOS
             // Adăugați valorile corespunzătoare din baza de date în
             // comboBoxCell2.Items
             string tablename = GetUsername.Userloggedname;
-            SqlConnection connection = ConnectStock.GetStockSqlcon();
+            SqlConnection connection = ConnectUserStock.GetStockSqlcon();
             connection.Open();
 
             string columnName2 = "Item";

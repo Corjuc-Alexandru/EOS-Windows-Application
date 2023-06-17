@@ -38,7 +38,7 @@ namespace EOS
             string inputPassword = deletePasswordtxtbox.Text;
             string hashedInputPassword = CryptPassword.GetMd5Hash(inputPassword);
             //create instanace of database connection
-            SqlConnection sqlcon = ConnectUser.GetUserSqlcon();
+            SqlConnection sqlcon = ConnectLogin.GetLoginSqlcon();
             string querry = "Select * from tbl_Login Where username = '"
                 + deleteUsertxtbox.Text + "' and password = '"
                 + hashedInputPassword + "'";
@@ -48,7 +48,7 @@ namespace EOS
             if (dtbl.Rows.Count == 1)
             {
                 //create instanace of database connection
-                SqlConnection sqlconuser = ConnectUser.GetUserSqlcon();
+                SqlConnection sqlconuser = ConnectLogin.GetLoginSqlcon();
                 //create SQL query to delete user from database
                 string querryuser = "DELETE from tbl_Login Where username = '"
                     + deleteUsertxtbox.Text + "'";
@@ -58,7 +58,7 @@ namespace EOS
                 DataTable dtbl1 = new DataTable();
                 sda1.Fill(dtbl1);
                 // Create a new SqlConnection object
-                SqlConnection connectionstock = ConnectStock.GetStockSqlcon();
+                SqlConnection connectionstock = ConnectUserStock.GetStockSqlcon();
                 // Open the connection
                 connectionstock.Open();
                 // create SQL query to delete table

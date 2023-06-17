@@ -41,5 +41,25 @@ namespace EOS.Command
                 }
             }
         }
+        public bool IsUserExists()
+        {
+            var name = GetUsername.userSignUp;
+            var table = "tbl_Login";
+            var column = "username";
+            string query = "SELECT COUNT(*) FROM " + table + " WHERE "
+                + column + " = @Name";
+
+            using (SqlConnection connection = ConnectLogin.GetLoginSqlcon())
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", name);
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
     }
 }

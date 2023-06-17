@@ -9,13 +9,13 @@ using System.Windows;
 
 namespace EOS
 {
-    internal class CountStockId
+    internal class CountUserStockId
     {
         public static int B()
         {
             string tbl_logged = GetUsername.Userloggedname;
             string stmt = $"SELECT COUNT(*) FROM dbo.[{tbl_logged}]";
-            SqlConnection thisConnection = ConnectStock.GetStockSqlcon();
+            SqlConnection thisConnection = ConnectUserStock.GetStockSqlcon();
             int count;
             {   
                 SqlCommand command = new SqlCommand(stmt, thisConnection);
