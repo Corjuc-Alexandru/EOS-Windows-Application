@@ -82,15 +82,6 @@ namespace EOS
             // Setarea proprietății RowHeadersVisible la false
             dataGridView1.RowHeadersVisible = false;
 
-            // Setarea proprietății AutoSizeColumnsMode la None pentru a permite dimensiunilor
-            // personalizate ale coloanelor
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-
-            // Setarea dimensiunilor coloanelor pentru a se potrivi conținutului
-            dataGridView1.AutoResizeColumns();
-
-            // Activarea barei de derulare orizontală și verticală
-            dataGridView1.ScrollBars = ScrollBars.Both;
         }
     }
 }
