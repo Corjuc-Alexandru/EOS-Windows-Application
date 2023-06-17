@@ -20,32 +20,77 @@ namespace EOS
         private void StocksForm_Load(object sender, EventArgs e)
         {
             string tablename = "Home";
+            string tablename2 = "Work";
             SqlConnection conn = ConnectUserStock.GetStockSqlcon();
-            string sql = $"SELECT Item, UM, Qty, Price " +
-                $"FROM {tablename}";
-            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
+            string selectAll = $"SELECT *, '{tablename}' AS Inventory FROM {tablename} " +
+                $"UNION ALL SELECT *, '{tablename2}' AS Inventory FROM {tablename2}";
+            SqlCommand command = new SqlCommand(selectAll, conn);
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
 
-            // Eliminați coloana "ID" din DataTable, dacă este prezentă
-            if (dt.Columns.Contains("ID"))
+            // Eliminarea coloanei "ID" din dataGridView1 (dacă există)
+            if (dataGridView1.Columns.Contains("ID"))
             {
-                dt.Columns.Remove("ID");
+                dataGridView1.Columns.Remove("ID");
             }
 
-            // Setarea proprietatii AllowUserToAddRows la false
-            dataGridView1.AllowUserToAddRows = false;
+            // Adăugarea coloanei "TableName" la începutul dataGridView1
+            dataGridView1.Columns.Add("Inventory", "Inventory");
 
-            // Setarea proprietatii RowHeadersVisible la false
-            dataGridView1.RowHeadersVisible = false;
-
-            // Atribuiți DataTable la DataSource-ul DataGridView
-            dataGridView1.DataSource = dt;
-            while (dataGridView1.Rows.Count < dataGridView1.RowCount)
+            // Adăugarea coloanelor din primul tabel
+            for (int i = 0; i < reader.FieldCount; i++)
             {
-                DataGridViewRow row = new DataGridViewRow();
+                string columnName = reader.GetName(i);
+                if (columnName != "ID" && columnName != "Inventory")
+                {
+                    dataGridView1.Columns.Add(columnName, columnName);
+                }
+            }
+
+            // Setarea corectă a numărului de coloane înainte de adăugarea rândurilor
+            int columnCount = dataGridView1.Columns.Count;
+            // Obțineți referința coloanei "Date" din dataGridView1
+            DataGridViewColumn dateColumn = dataGridView1.Columns["Date"];
+
+            // Setarea opțiunii de formatare pentru a afișa doar data
+            dateColumn.DefaultCellStyle.Format = "dd.MM.yyyy";
+
+            while (reader.Read())
+            {
+                object[] row = new object[columnCount];
+                row[0] = reader.GetValue(reader.GetOrdinal("Inventory")); // Valoarea pentru coloana "TableName"
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    string columnName = reader.GetName(i);
+                    if (columnName != "ID" && columnName != "Inventory")
+                    {
+                        int columnIndex = dataGridView1.Columns[columnName].Index;
+                        row[columnIndex] = reader.GetValue(i);
+                    }
+                }
+
                 dataGridView1.Rows.Add(row);
             }
+
+            reader.Close();
+            conn.Close();
+
+            // Setarea proprietății AllowUserToAddRows la false
+            dataGridView1.AllowUserToAddRows = false;
+
+            // Setarea proprietății RowHeadersVisible la false
+            dataGridView1.RowHeadersVisible = false;
+
+            // Setarea proprietății AutoSizeColumnsMode la None pentru a permite dimensiunilor
+            // personalizate ale coloanelor
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+            // Setarea dimensiunilor coloanelor pentru a se potrivi conținutului
+            dataGridView1.AutoResizeColumns();
+
+            // Activarea barei de derulare orizontală și verticală
+            dataGridView1.ScrollBars = ScrollBars.Both;
         }
     }
 }
