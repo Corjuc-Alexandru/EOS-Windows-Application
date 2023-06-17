@@ -19,9 +19,9 @@ namespace EOS
 
         private void StocksForm_Load(object sender, EventArgs e)
         {
-            string tablename = GetUsername.Userloggedname;
+            string tablename = "Home";
             SqlConnection conn = ConnectUserStock.GetStockSqlcon();
-            string sql = $"SELECT Inventory, Item, UM, Qty, Price " +
+            string sql = $"SELECT Item, UM, Qty, Price " +
                 $"FROM {tablename}";
             SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();

@@ -62,7 +62,7 @@ namespace EOS
                 // Open the connection
                 connectionstock.Open();
                 // create SQL query to delete table
-                string sqlQuerystock = $"DROP TABLE {deleteUsertxtbox.Text}";
+                string sqlQuerystock = $"DROP DATABASE {deleteUsertxtbox.Text}";
                 // Create a new SqlCommand object with the
                 // DELETE TABLE query
                 SqlCommand deleteTableCommand =

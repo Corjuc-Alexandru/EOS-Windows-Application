@@ -25,11 +25,10 @@ namespace EOS
         {
             int id = CountUserStockId.B() + 1;
             string insertUnits = comboBox2.SelectedItem.ToString();
-            string insertInventory = comboBox1.SelectedItem.ToString();
-            string tableName = GetUsername.Userloggedname;
+            string tableName = comboBox1.SelectedItem.ToString();
             //create instanace of database connection
-            string query1 = $"INSERT INTO [{tableName}] (ID, Inventory, Item, " +
-                $"UM, Qty, Price, Date) VALUES (@ID, @Inventory, @Item," +
+            string query1 = $"INSERT INTO [{tableName}] (ID, Item, " +
+                $"UM, Qty, Price, Date) VALUES (@ID, @Item," +
                 $" @UM, @Qty, @Price, @Date)";
             SqlConnection sqlcon = ConnectUserStock.GetStockSqlcon();
             {
@@ -37,7 +36,6 @@ namespace EOS
                 {
                     // set parameter values
                     command.Parameters.AddWithValue("@ID", id);
-                    command.Parameters.AddWithValue("@Inventory", insertInventory);
                     command.Parameters.AddWithValue("@Item",insertNametxtbox.Text);
                     command.Parameters.AddWithValue("@UM", insertUnits);
                     command.Parameters.AddWithValue("@Qty", insertQtytxtbox.Text);

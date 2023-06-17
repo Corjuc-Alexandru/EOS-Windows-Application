@@ -70,7 +70,6 @@ namespace EOS
                     }
                     CheckExist checker = new CheckExist();
                     bool c = checker.IsUserDatabaseExists();
-                    bool d = checker.IsStocksDatabaseExist();
                     if (!c)
                     {
                         // Create a new SQL connection
@@ -148,31 +147,35 @@ namespace EOS
                                     userSqlCon.Close();
                                 }
                             }
-                                // Create a new SQL connection to Stock database
-                                SqlConnection stockSqlCon = ConnectUserStock.GetSignupUserSqlcon();
-                                {
-                                    // SQL Server connection string
-                                    stockSqlCon.Open();
-                                    string tableName = GetUsername.userSignUp;
-                                    string columnID = "ID";
-                                    string columnInventory = "Inventory";
-                                    string columnItem = "Item";
-                                    string columnUM = "UM";
-                                    string columnQty = "Qty";
-                                    string columnPrice = "Price";
-                                    string columnDate = "Date";
-                                    // create SQL query to create table
-                                    string createStockTable = $"CREATE TABLE " +
-                                        $"{tableName} ({columnID} " +
-                                        $"INT PRIMARY KEY, {columnInventory} " +
-                                        $"VARCHAR(50), {columnItem} VARCHAR(50), {columnUM} " +
-                                        $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
-                                        $"DECIMAL(10,2), {columnDate} DATE)";
-                                    SqlCommand createTableCommand =
-                                        new SqlCommand(createStockTable, stockSqlCon);
-                                    createTableCommand.ExecuteNonQuery();
-                                    stockSqlCon.Close();
-                                }
+                            // Create a new SQL connection to Stock database
+                            SqlConnection stockSqlCon = ConnectUserStock.GetSignupUserSqlcon();
+                            {
+                                // SQL Server connection string
+                                stockSqlCon.Open();
+                                string tableName = "Home";
+                                string tableName2 = "Work";
+                                string columnID = "ID";
+                                string columnItem = "Item";
+                                string columnUM = "UM";
+                                string columnQty = "Qty";
+                                string columnPrice = "Price";
+                                string columnDate = "Date";
+                                // create SQL query to create table
+                                string createStockTable = $"CREATE TABLE " +
+                                    $"{tableName} ({columnID} " +
+                                    $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                    $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
+                                    $"DECIMAL(10,2), {columnDate} DATE);" +
+                                    $"CREATE TABLE " +
+                                    $"{tableName2} ({columnID} " +
+                                    $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                    $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
+                                    $"DECIMAL(10,2), {columnDate} DATE);";
+                                SqlCommand createTableCommand =
+                                    new SqlCommand(createStockTable, stockSqlCon);
+                                createTableCommand.ExecuteNonQuery();
+                                stockSqlCon.Close();
+                            }
                             MessageBox.Show("SignIn succesful!");
                             this.Close();
                         }
@@ -235,9 +238,9 @@ namespace EOS
                                 {
                                     // SQL Server connection string
                                     stockSqlCon.Open();
-                                    string tableName = GetUsername.userSignUp;
+                                    string tableName = "Home";
+                                    string tableName2 = "Work";
                                     string columnID = "ID";
-                                    string columnInventory = "Inventory";
                                     string columnItem = "Item";
                                     string columnUM = "UM";
                                     string columnQty = "Qty";
@@ -246,10 +249,14 @@ namespace EOS
                                     // create SQL query to create table
                                     string createStockTable = $"CREATE TABLE " +
                                         $"{tableName} ({columnID} " +
-                                        $"INT PRIMARY KEY, {columnInventory} " +
-                                        $"VARCHAR(50), {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
                                         $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
-                                        $"DECIMAL(10,2), {columnDate} DATE)";
+                                        $"DECIMAL(10,2), {columnDate} DATE);" +
+                                        $"CREATE TABLE " +
+                                        $"{tableName2} ({columnID} " +
+                                        $"INT PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
+                                        $"DECIMAL(10,2), {columnDate} DATE);";
                                     SqlCommand createTableCommand =
                                         new SqlCommand(createStockTable, stockSqlCon);
                                     createTableCommand.ExecuteNonQuery();

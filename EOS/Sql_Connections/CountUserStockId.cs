@@ -13,7 +13,7 @@ namespace EOS
     {
         public static int B()
         {
-            string tbl_logged = GetUsername.Userloggedname;
+            string tbl_logged = "Home";
             string stmt = $"SELECT COUNT(*) FROM dbo.[{tbl_logged}]";
             SqlConnection thisConnection = ConnectUserStock.GetStockSqlcon();
             int count;
