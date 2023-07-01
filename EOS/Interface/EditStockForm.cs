@@ -36,9 +36,6 @@ namespace EOS
             // Adăugați un rând nou în DataGridView
             int rowIndex = dataGridView1.Rows.Add();
 
-            // Creați o variabilă pentru a aduna datele din baza de date
-            List<string> databaseValues = new List<string>();
-
             // Obțineți referința la celula ComboBox pentru noul rând
             DataGridViewComboBoxCell comboBoxCell1 = (DataGridViewComboBoxCell)dataGridView1.Rows[rowIndex].Cells["Item"];
 
@@ -46,14 +43,10 @@ namespace EOS
             {
                 // Adăugați datele în lista de elemente a ComboBox-ului
                 comboBoxCell1.Items.Add(reader["Item"].ToString());
-
-                // Adăugați datele în listă
-                databaseValues.Add(reader["Item"].ToString());
             }
 
             reader.Close();
             connection.Close();
-
         }
 
 
@@ -63,10 +56,9 @@ namespace EOS
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 // Obținem valorile din rândul curent
-                string inventory = row.Cells["inventory"].Value.ToString();
-                string item = row.Cells["item"].Value.ToString();
-                string um = row.Cells["um"].Value.ToString();
-                int qty = int.Parse(row.Cells["qty"].Value.ToString());
+                string inventory = row.Cells["Inventory"].Value.ToString();
+                string item = row.Cells["Item"].Value.ToString();
+                int qty = int.Parse(row.Cells["Qty"].Value.ToString());
 
                 // Salvăm valorile în baza de date
                 // ...
