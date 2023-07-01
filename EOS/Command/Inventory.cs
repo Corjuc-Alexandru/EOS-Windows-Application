@@ -12,10 +12,8 @@ namespace EOS.Command
     {
         public string All()
         {
-            string tablename = "Home";
-            string tablename2 = "Work";
-            string selectAll = $"SELECT *, '{tablename}' AS Inventory FROM {tablename} " +
-                $"UNION ALL SELECT *, '{tablename2}' AS Inventory FROM {tablename2}";
+            string selectAll = $"SELECT *, 'Home' AS Inventory FROM Home " +
+                $"UNION ALL SELECT *, 'Work' AS Inventory FROM Work";
             return selectAll;
         }
         public string Home()

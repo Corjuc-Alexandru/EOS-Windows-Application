@@ -41,7 +41,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.checkBox1.Location = new System.Drawing.Point(279, 116);
+            this.checkBox1.Location = new System.Drawing.Point(277, 142);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 3;
@@ -78,16 +78,16 @@
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(143, 29);
+            this.textBox4.Size = new System.Drawing.Size(143, 58);
             this.textBox4.TabIndex = 8;
             this.textBox4.TabStop = false;
-            this.textBox4.Text = "Password :";
+            this.textBox4.Text = "Current Password :";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // changePasstxtbox
             // 
             this.changePasstxtbox.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changePasstxtbox.Location = new System.Drawing.Point(145, 108);
+            this.changePasstxtbox.Location = new System.Drawing.Point(145, 132);
             this.changePasstxtbox.Name = "changePasstxtbox";
             this.changePasstxtbox.PasswordChar = '*';
             this.changePasstxtbox.Size = new System.Drawing.Size(158, 32);
@@ -130,7 +130,7 @@
             this.Controls.Add(this.changeUsertxtbox);
             this.Controls.Add(this.textBox2);
             this.Font = new System.Drawing.Font("Cambria", 14.25F);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ChangePassForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change my password";

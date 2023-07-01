@@ -30,52 +30,98 @@ namespace EOS
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.menuStrip1.SuspendLayout();
+            this.Inventory = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Item = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.UM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // buttonAdd
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.buttonAdd.Location = new System.Drawing.Point(12, 12);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.TabIndex = 2;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // addToolStripMenuItem
+            // buttonEdit
             // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.addToolStripMenuItem.Text = "Add";
+            this.buttonEdit.Location = new System.Drawing.Point(93, 12);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
             // 
-            // editToolStripMenuItem
+            // buttonDelete
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.buttonDelete.Location = new System.Drawing.Point(174, 12);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 4;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
-            // deleteToolStripMenuItem
+            // buttonSave
             // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.buttonSave.Location = new System.Drawing.Point(12, 351);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 5;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 28);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Inventory,
+            this.Item,
+            this.UM,
+            this.Qty,
+            this.Price});
+            this.dataGridView1.Location = new System.Drawing.Point(-1, 41);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 260);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.Size = new System.Drawing.Size(800, 304);
+            this.dataGridView1.TabIndex = 6;
+            // 
+            // Inventory
+            // 
+            this.Inventory.HeaderText = "Inventory";
+            this.Inventory.Name = "Inventory";
+            // 
+            // Item
+            // 
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            // 
+            // UM
+            // 
+            this.UM.HeaderText = "UM";
+            this.UM.Name = "UM";
+            // 
+            // Qty
+            // 
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
             // 
             // EditStockForm
             // 
@@ -83,26 +129,29 @@ namespace EOS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 386);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.buttonEdit);
+            this.Controls.Add(this.buttonAdd);
             this.Name = "EditStockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Stock";
             this.Load += new System.EventHandler(this.EditStockForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private Button buttonAdd;
+        private Button buttonEdit;
+        private Button buttonDelete;
+        private Button buttonSave;
+        private DataGridView dataGridView1;
+        private DataGridViewComboBoxColumn Inventory;
+        private DataGridViewComboBoxColumn Item;
+        private DataGridViewTextBoxColumn UM;
+        private DataGridViewTextBoxColumn Qty;
+        private DataGridViewTextBoxColumn Price;
     }
 }

@@ -36,6 +36,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -117,6 +118,11 @@
     <Compile Include="Interface\StocksForm.Designer.cs">
       <DependentUpon>StocksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Test1DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test1DataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Interface\ChangePassForm.resx">
       <DependentUpon>ChangePassForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,10 +172,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Test1DataSet.xsc">
+      <DependentUpon>Test1DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Test1DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Test1DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Test1DataSet.xss">
+      <DependentUpon>Test1DataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\icons8-search-50.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace EOS
@@ -19,153 +20,60 @@ namespace EOS
             InitializeComponent();
         }
 
-        private string select;
-
-
         private void EditStockForm_Load(object sender, EventArgs e)
         {
 
-            string tablename = "Home";
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
             SqlConnection connection = ConnectUserStock.GetStockSqlcon();
             connection.Open();
-            string query = $"SELECT * FROM {tablename}";
+            string query = "SELECT Item FROM Home";
             SqlCommand command = new SqlCommand(query, connection);
-            SqlDataReader reader1 = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            // Crearea obiectului DataGridViewComboBoxColumn și adăugarea valorilor
-            DataGridViewComboBoxColumn comboBoxColumn1 = 
-                new DataGridViewComboBoxColumn();
-            comboBoxColumn1.Name = "Inventory";
-            while (reader1.Read())
-            {
-                string value = reader1[tablename].ToString();
-                comboBoxColumn1.Items.Add(value);
-            }
-            // Adăugarea obiectului DataGridViewComboBoxColumn la DataGridView
-            dataGridView1.Columns.Add(comboBoxColumn1);
-            reader1.Close();
-            if (comboBoxColumn1.Items.Count > 0)
-            {
-                DataGridViewRow firstRow = dataGridView1.Rows[0];
-                firstRow.Cells["Inventory"].Value = comboBoxColumn1.Items[0];
-            }
+            // Adăugați un rând nou în DataGridView
+            int rowIndex = dataGridView1.Rows.Add();
 
-            //column2
-            string columnName2 = "Item";
-            string query2 = $"SELECT DISTINCT {columnName2} FROM {tablename}" +
-                $" WHERE Inventory = '{select}'";
-            SqlCommand command2 = new SqlCommand(query2, connection);
-            SqlDataReader reader2 = command2.ExecuteReader();
+            // Creați o variabilă pentru a aduna datele din baza de date
+            List<string> databaseValues = new List<string>();
 
-            // Crearea obiectului DataGridViewComboBoxColumn și adăugarea valorilor
-            DataGridViewComboBoxColumn comboBoxColumn2 = 
-                new DataGridViewComboBoxColumn();
-            comboBoxColumn2.Name = "Item";
-            while (reader2.Read())
+            // Obțineți referința la celula ComboBox pentru noul rând
+            DataGridViewComboBoxCell comboBoxCell1 = (DataGridViewComboBoxCell)dataGridView1.Rows[rowIndex].Cells["Item"];
+
+            while (reader.Read())
             {
-                string value2 = reader2[columnName2].ToString();
-                comboBoxColumn2.Items.Add(value2);
+                // Adăugați datele în lista de elemente a ComboBox-ului
+                comboBoxCell1.Items.Add(reader["Item"].ToString());
+
+                // Adăugați datele în listă
+                databaseValues.Add(reader["Item"].ToString());
             }
 
-            // Adăugarea obiectului DataGridViewComboBoxColumn la DataGridView
-            dataGridView1.Columns.Add(comboBoxColumn2);
-            reader2.Close();
-            // Închiderea conexiunii și eliberarea resurselor
-
+            reader.Close();
             connection.Close();
-            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-        }
-
-        private void dataGridView1_CellValueChanged(object sender, 
-            DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridView1.Columns["Inventory"].Index)
-            {
-
-                ResetSecondComboBoxValues();
-            }
-
-            if (e.ColumnIndex == dataGridView1.Columns["Inventory"].Index 
-                && e.RowIndex >= 0)
-            {
-                // Obțineți valoarea selectată din combobox-ul column 1
-                DataGridViewComboBoxCell comboBoxCell1 = 
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex] 
-                    as DataGridViewComboBoxCell;
-                string selectedValue = comboBoxCell1.Value?.ToString();
-
-                if (!string.IsNullOrEmpty(selectedValue))
-                {
-                    // Obțineți combobox-ul column 2 din rândul curent
-                    DataGridViewComboBoxCell comboBoxCell2 = 
-                        dataGridView1.Rows[e.RowIndex].Cells["Item"] 
-                        as DataGridViewComboBoxCell;
-
-                    // Resetați valorile combobox-ului column 2
-                    comboBoxCell2.Items.Clear();
-
-                    // Adăugați valorile corespunzătoare din baza de date
-                    // în comboBoxCell2.Items
-                    string tablename = GetUsername.Userloggedname;
-                    SqlConnection connection = ConnectUserStock.GetStockSqlcon();
-                    connection.Open();
-
-                    string columnName2 = "Item";
-                    string query2 = $"SELECT DISTINCT {columnName2} FROM {tablename} " +
-                        $"WHERE Inventory = @selectedValue";
-                    SqlCommand command2 = new SqlCommand(query2, connection);
-                    command2.Parameters.AddWithValue("@selectedValue", selectedValue);
-                    SqlDataReader reader2 = command2.ExecuteReader();
-
-                    while (reader2.Read())
-                    {
-                        string value2 = reader2[columnName2].ToString();
-                        comboBoxCell2.Items.Add(value2);
-                    }
-
-                    reader2.Close();
-
-                    // Închiderea conexiunii și eliberarea resurselor
-                    connection.Close();
-                }
-            }
 
         }
 
-        private void ResetSecondComboBoxValues()
+
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-            string selectedValue = 
-                dataGridView1.CurrentRow.Cells["Inventory"].Value.ToString();
-            DataGridViewComboBoxColumn comboBoxColumn2 = 
-                dataGridView1.Columns["Item"] as DataGridViewComboBoxColumn;
-            comboBoxColumn2.Items.Clear();
-
-            // Populați comboBoxColumn2 cu valorile actualizate în funcție de
-            // selectedValue
-            // Adăugați valorile corespunzătoare din baza de date în
-            // comboBoxCell2.Items
-            string tablename = GetUsername.Userloggedname;
-            SqlConnection connection = ConnectUserStock.GetStockSqlcon();
-            connection.Open();
-
-            string columnName2 = "Item";
-            string query2 = $"SELECT DISTINCT {columnName2} FROM {tablename} " +
-                $"WHERE Inventory = @selectedValue";
-            SqlCommand command2 = new SqlCommand(query2, connection);
-            command2.Parameters.AddWithValue("@selectedValue", selectedValue);
-            SqlDataReader reader2 = command2.ExecuteReader();
-
-            while (reader2.Read())
+            // Parcurgem fiecare rând din DataGridView și salvăm valorile în baza de date
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                string value2 = reader2[columnName2].ToString();
-                comboBoxColumn2.Items.Add(value2);
+                // Obținem valorile din rândul curent
+                string inventory = row.Cells["inventory"].Value.ToString();
+                string item = row.Cells["item"].Value.ToString();
+                string um = row.Cells["um"].Value.ToString();
+                int qty = int.Parse(row.Cells["qty"].Value.ToString());
+
+                // Salvăm valorile în baza de date
+                // ...
+
+                // Actualizăm valoarea din tabelul SQL (qty)
+                // ...
             }
-
-            reader2.Close();
-
-            // Închiderea conexiunii și eliberarea resurselor
-            connection.Close();
-            // Adăugați noile valori în comboBoxColumn2.Items
         }
     }
 }
