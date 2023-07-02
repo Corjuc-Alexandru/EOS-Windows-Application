@@ -97,6 +97,7 @@ namespace EOS
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(800, 304);
             this.dataGridView1.TabIndex = 6;
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
             // Inventory
             // 
