@@ -118,7 +118,7 @@
             this.textBox5.Size = new System.Drawing.Size(100, 13);
             this.textBox5.TabIndex = 9;
             this.textBox5.TabStop = false;
-            this.textBox5.Text = "Price";
+            this.textBox5.Text = "Price per unit";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // insertPricetxtbox

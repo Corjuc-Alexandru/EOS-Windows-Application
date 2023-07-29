@@ -31,15 +31,16 @@ namespace EOS
         private void InitializeComponent()
         {
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Inventory = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Item = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.UM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,23 +54,15 @@ namespace EOS
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Location = new System.Drawing.Point(93, 12);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(75, 23);
-            this.buttonEdit.TabIndex = 3;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(174, 12);
+            this.buttonDelete.Location = new System.Drawing.Point(93, 12);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 4;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonSave
             // 
@@ -90,39 +83,55 @@ namespace EOS
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Inventory,
             this.Item,
-            this.UM,
+            this.qtyStock,
             this.Qty,
-            this.Price});
+            this.UM,
+            this.Price,
+            this.totalPrice});
             this.dataGridView1.Location = new System.Drawing.Point(-1, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(800, 304);
             this.dataGridView1.TabIndex = 6;
-            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
             // Inventory
             // 
+            this.Inventory.FillWeight = 80F;
             this.Inventory.HeaderText = "Inventory";
             this.Inventory.Name = "Inventory";
             // 
             // Item
             // 
+            this.Item.FillWeight = 120F;
             this.Item.HeaderText = "Item";
             this.Item.Name = "Item";
             // 
-            // UM
+            // qtyStock
             // 
-            this.UM.HeaderText = "UM";
-            this.UM.Name = "UM";
+            this.qtyStock.FillWeight = 70F;
+            this.qtyStock.HeaderText = "Qty In Stock";
+            this.qtyStock.Name = "qtyStock";
             // 
             // Qty
             // 
-            this.Qty.HeaderText = "Qty";
+            this.Qty.FillWeight = 70F;
+            this.Qty.HeaderText = "Qty Out";
             this.Qty.Name = "Qty";
+            // 
+            // UM
+            // 
+            this.UM.FillWeight = 40F;
+            this.UM.HeaderText = "UM";
+            this.UM.Name = "UM";
             // 
             // Price
             // 
-            this.Price.HeaderText = "Price";
+            this.Price.HeaderText = "Price per Unit";
             this.Price.Name = "Price";
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.HeaderText = "Total Price";
+            this.totalPrice.Name = "totalPrice";
             // 
             // EditStockForm
             // 
@@ -132,7 +141,6 @@ namespace EOS
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Name = "EditStockForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -145,14 +153,15 @@ namespace EOS
 
         #endregion
         private Button buttonAdd;
-        private Button buttonEdit;
         private Button buttonDelete;
         private Button buttonSave;
         private DataGridView dataGridView1;
         private DataGridViewComboBoxColumn Inventory;
         private DataGridViewComboBoxColumn Item;
-        private DataGridViewTextBoxColumn UM;
+        private DataGridViewTextBoxColumn qtyStock;
         private DataGridViewTextBoxColumn Qty;
+        private DataGridViewTextBoxColumn UM;
         private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn totalPrice;
     }
 }
