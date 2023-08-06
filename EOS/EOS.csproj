@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\AddButtonHandler.cs" />
+    <Compile Include="Command\CellValueChangeHandler.cs" />
     <Compile Include="Command\Inventory.cs" />
     <Compile Include="Interface\ChangePassForm.cs">
       <SubType>Form</SubType>
@@ -118,11 +120,7 @@
     <Compile Include="Interface\StocksForm.Designer.cs">
       <DependentUpon>StocksForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test1DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Test1DataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Command\UpdateDatabase.cs" />
     <EmbeddedResource Include="Interface\ChangePassForm.resx">
       <DependentUpon>ChangePassForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,17 +170,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Test1DataSet.xsc">
-      <DependentUpon>Test1DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Test1DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Test1DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Test1DataSet.xss">
-      <DependentUpon>Test1DataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
