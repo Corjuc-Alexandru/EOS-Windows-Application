@@ -40,7 +40,6 @@ namespace EOS
                 command.Parameters.AddWithValue("@Qty", insertQtytxtbox.Text);
                 command.Parameters.AddWithValue("@Price", valueprice);
 
-                // Setarea valorii pentru parametrul @Date
                 DateTime selectedDate = insertDatepicker.Value.Date;
                 SqlParameter param = new SqlParameter("@Date", SqlDbType.Date);
                 param.Value = selectedDate;

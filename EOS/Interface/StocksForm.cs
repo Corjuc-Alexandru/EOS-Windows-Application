@@ -36,7 +36,6 @@ namespace EOS
             {
                 Inventory inventory = new Inventory();
                 sqlQuery = inventory.Home();
-                // Ștergeți coloanele existente din DataGridView
                 dataGridView1.Columns.Clear();
             }
             else if (selectedOption == "Work")
@@ -50,10 +49,8 @@ namespace EOS
             conn.Open();
             SqlDataReader reader = command.ExecuteReader();
 
-            // Adăugarea coloanei "TableName" la începutul dataGridView1
             dataGridView1.Columns.Add("Inventory", "Inventory");
 
-            // Adăugarea coloanelor din primul tabel
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 string columnName = reader.GetName(i);
@@ -63,18 +60,15 @@ namespace EOS
                 }
             }
 
-            // Setarea corectă a numărului de coloane înainte de adăugarea rândurilor
             int columnCount = dataGridView1.Columns.Count;
-            // Obțineți referința coloanei "Date" din dataGridView1
             DataGridViewColumn dateColumn = dataGridView1.Columns["Date"];
 
-            // Setarea opțiunii de formatare pentru a afișa doar data
             dateColumn.DefaultCellStyle.Format = "dd.MM.yyyy";
 
             while (reader.Read())
             {
                 object[] row = new object[columnCount];
-                row[0] = reader.GetValue(reader.GetOrdinal("Inventory")); // Valoarea pentru coloana "TableName"
+                row[0] = reader.GetValue(reader.GetOrdinal("Inventory"));
 
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
@@ -85,26 +79,21 @@ namespace EOS
                         row[columnIndex] = reader.GetValue(i);
                     }
                 }
-                // Anulează legarea datelor
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Add(row);
-                // Reface legarea datelor
             }
 
             reader.Close();
             conn.Close();
 
-            // Setarea proprietății AllowUserToAddRows la false
             dataGridView1.AllowUserToAddRows = false;
 
-            // Setarea proprietății RowHeadersVisible la false
             dataGridView1.RowHeadersVisible = false;
 
             if (dataGridView1.Columns != null && dataGridView1.Columns.Contains("ID"))
             {
                 dataGridView1.Columns.Remove("ID");
             }
-            // Eliminarea coloanei "ID" din dataGridView1 (dacă există)
             if (dataGridView1.Columns.Contains("ID"))
             {
                 dataGridView1.Columns.Remove("ID");
@@ -116,10 +105,8 @@ namespace EOS
         {
             string cuvantCautat = textBox1.Text.Trim();
 
-            // Verifică dacă TextBox este gol
             if (string.IsNullOrEmpty(cuvantCautat))
             {
-                // Dacă TextBox este gol, afișează toate înregistrările din DataGridView
                 comboBox1_SelectedIndexChanged(sender, e);
             }
             else
@@ -138,7 +125,6 @@ namespace EOS
                 {
                     Inventory inventory = new Inventory();
                     sqlQuery = inventory.Home();
-                    // Adaugă clauza WHERE pentru a căuta înregistrările care conțin cuvântul căutat în coloana "Item"
                     sqlQuery += " WHERE Item LIKE @cuvantCautat ESCAPE '\\'";
 
                 }
@@ -146,11 +132,9 @@ namespace EOS
                 {
                     Inventory inventory = new Inventory();
                     sqlQuery = inventory.Work();
-                    // Adaugă clauza WHERE pentru a căuta înregistrările care conțin cuvântul căutat în coloana "Item"
                     sqlQuery += " WHERE Item LIKE @cuvantCautat ESCAPE '\\'";
 
                 }
-                // Ștergeți coloanele existente din DataGridView
                 dataGridView1.Columns.Clear();
 
                 using (SqlConnection connection = ConnectUserStock.GetStockSqlcon())
@@ -164,17 +148,14 @@ namespace EOS
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
 
-                    // Crearea unui nou DataTable pentru a păstra rezultatele căutării
                     DataTable filteredDataTable = new DataTable();
 
-                    // Copierea structurii coloanelor din reader în filteredDataTable
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         string columnName = reader.GetName(i);
                         filteredDataTable.Columns.Add(columnName, reader.GetFieldType(i));
                     }
 
-                    // Adăugarea rândurilor care corespund criteriului de căutare în filteredDataTable
                     while (reader.Read())
                     {
                         DataRow newRow = filteredDataTable.NewRow();
@@ -191,7 +172,6 @@ namespace EOS
                     reader.Close();
                     connection.Close();
 
-                    // Rearanjarea coloanelor în dataGridView1
                     foreach (DataColumn column in filteredDataTable.Columns)
                     {
                         if (column.ColumnName != "Inventory")
@@ -200,7 +180,6 @@ namespace EOS
                         }
                     }
 
-                    // Adăugarea coloanei "Inventory" pe prima poziție în dataGridView1
                     if (filteredDataTable.Columns.Contains("Inventory"))
                     {
                         DataGridViewTextBoxColumn inventoryColumn = new DataGridViewTextBoxColumn();
@@ -209,13 +188,10 @@ namespace EOS
                         dataGridView1.Columns.Insert(0, inventoryColumn);
                     }
 
-                    // Adăugarea rândurilor în dataGridView1
                     foreach (DataRow row in filteredDataTable.Rows)
                     {
-                        // Creează un nou obiect object[] pentru valorile dorite în ordinea corectă a coloanelor
                         object[] rowData = new object[dataGridView1.Columns.Count];
 
-                        // Adaugă valorile în obiectul rowData în ordinea corectă a coloanelor
                         for (int i = 0; i < filteredDataTable.Columns.Count; i++)
                         {
                             DataColumn column = filteredDataTable.Columns[i];
@@ -235,16 +211,13 @@ namespace EOS
                         }
 
                         dataGridView1.Rows.Add(rowData);
-                        // Obțineți referința coloanei "Date" din dataGridView1
                         DataGridViewColumn dateColumn = dataGridView1.Columns["Date"];
 
-                        // Setarea opțiunii de formatare pentru a afișa doar data
                         dateColumn.DefaultCellStyle.Format = "dd.MM.yyyy";
                         if (dataGridView1.Columns != null && dataGridView1.Columns.Contains("ID"))
                         {
                             dataGridView1.Columns.Remove("ID");
                         }
-                        // Eliminarea coloanei "ID" din dataGridView1 (dacă există)
                         if (dataGridView1.Columns.Contains("ID"))
                         {
                             dataGridView1.Columns.Remove("ID");
@@ -259,9 +232,9 @@ namespace EOS
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                e.Handled = true; // Opriți sunetul caracterului Enter
+                e.Handled = true;
 
-                button1.PerformClick(); // Declanșați evenimentul Click al butonului button1
+                button1.PerformClick();
 
             }
         }
