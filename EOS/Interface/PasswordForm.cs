@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EOS
@@ -21,6 +14,7 @@ namespace EOS
         private void newpassButton_Click(object sender, EventArgs e)
         {
             bool a = newpasstxtbox.Text == confirmpasstxtbox.Text;
+
             if (a == true)
             {
                 SqlConnection sqlcon = ConnectLogin.GetLoginSqlcon();
@@ -30,22 +24,22 @@ namespace EOS
                     string hashedNewPassword =
                         CryptPassword.GetMd5Hash(newpasstxtbox.Text);
                     // Store the hashed password in the database                    
-                    using (SqlCommand updateCmd = new SqlCommand(
-                        "UPDATE tbl_Login SET Password = @password WHERE " +
+                    using (SqlCommand updateCmd = 
+                        new SqlCommand("UPDATE tbl_Login SET Password = @password WHERE " +
                         "Username = @username", sqlcon))
                     {
-                        updateCmd.Parameters.AddWithValue(
-                            "@password", hashedNewPassword);
-                        updateCmd.Parameters.AddWithValue(
-                            "@username", GetUsername.Userchangepass);
+                        updateCmd.Parameters.AddWithValue("@password", hashedNewPassword);
+                        updateCmd.Parameters.AddWithValue("@username", GetUsername.Userchangepass);
                         updateCmd.ExecuteNonQuery();
                     }
                 }
             }
+
             else
             {
                 MessageBox.Show("The passwords doesn't match.");
             }
+
             MessageBox.Show("Password was changed!");
             this.Close();
         }
@@ -62,6 +56,7 @@ namespace EOS
                 newpasstxtbox.PasswordChar = '\0';
                 // show password in plain text
             }
+
             else
             {
                 newpasstxtbox.PasswordChar = '*';
@@ -76,12 +71,12 @@ namespace EOS
                 confirmpasstxtbox.PasswordChar = '\0';
                 // show password in plain text
             }
+
             else
             {
                 confirmpasstxtbox.PasswordChar = '*';
                 // hide password
             }
         }
-
     }
 }

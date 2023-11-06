@@ -15,9 +15,11 @@ namespace EOS
         private void changeButton_Click(object sender, EventArgs e)
         {
             bool a = forgotConfirmpasstxtbox.Text == forgotPasstxtbox.Text;
+
             if (a == true)
             {
                 bool b = CheckPassword.ValidatePassword(forgotPasstxtbox.Text);
+
                 if (b == true)            
                 {
                     SqlConnection sqlcon = ConnectLogin.GetLoginSqlcon();           
@@ -27,25 +29,25 @@ namespace EOS
                         string hashedNewPassword =
                             CryptPassword.GetMd5Hash(forgotPasstxtbox.Text);                    
                         // Store the hashed password in the database                    
-                        using (SqlCommand updateCmd = new SqlCommand(
-                            "UPDATE tbl_Login SET Password = @password WHERE " +
+                        using (SqlCommand updateCmd = 
+                            new SqlCommand("UPDATE tbl_Login SET Password = @password WHERE " +
                             "Username = @username", sqlcon))                    
                         {                        
-                            updateCmd.Parameters.AddWithValue(
-                                "@password", hashedNewPassword);                        
-                            updateCmd.Parameters.AddWithValue(
-                                "@username", forgotUsertxtbox.Text);                        
+                            updateCmd.Parameters.AddWithValue("@password", hashedNewPassword);                        
+                            updateCmd.Parameters.AddWithValue("@username", forgotUsertxtbox.Text);                        
                             updateCmd.ExecuteNonQuery();
                         }
                     }
                     MessageBox.Show("Password was changed!");
                         this.Close();
-                }         
+                }
+                
                 else
                 {               
                     MessageBox.Show("Invalid password syntax!");
                 }
-            }    
+            }
+            
             else
             {
                 MessageBox.Show("The passwords doesn't match.");
@@ -64,6 +66,7 @@ namespace EOS
                 forgotPasstxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
+
             else
             {
                 forgotPasstxtbox.PasswordChar = '*'; 
@@ -78,6 +81,7 @@ namespace EOS
                 forgotConfirmpasstxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
+
             else
             {
                 forgotConfirmpasstxtbox.PasswordChar = '*'; 

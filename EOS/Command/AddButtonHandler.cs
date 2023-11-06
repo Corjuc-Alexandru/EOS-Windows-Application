@@ -8,7 +8,6 @@ namespace EOS
     public class AddButtonHandler
     {
         private DataGridView dataGridView;
-
         public AddButtonHandler(DataGridView dataGridView)
         {
             this.dataGridView = dataGridView;
@@ -18,11 +17,12 @@ namespace EOS
         {
             SqlConnection connection = ConnectUserStock.GetStockSqlcon();
             connection.Open();
-            string querytbl = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+            string querytbl = 
+                "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = " +
+                "'BASE TABLE'";
             SqlCommand tblcommand = new SqlCommand(querytbl, connection);
             SqlDataReader tblread = tblcommand.ExecuteReader();
 
-            // Add a new row in the DataGridView
             int rowIndex = dataGridView.Rows.Add();
 
             // List to store table names
@@ -39,10 +39,10 @@ namespace EOS
                 // Add the table names to the ComboBox list
                 inventoryComboBoxCell.Items.AddRange(tableNames.ToArray());
 
-                // Assign the DataGridViewComboBoxCell object to the corresponding cell in the "Inventory" column
+                // Assign the DataGridViewComboBoxCell object to the corresponding cell
+                // in the "Inventory" column
                 dataGridView.Rows[rowIndex].Cells["Inventory"] = inventoryComboBoxCell;
             }
-
             tblread.Close();
             connection.Close();
         }

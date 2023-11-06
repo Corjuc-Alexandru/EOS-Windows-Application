@@ -36,7 +36,8 @@ namespace EOS
                         SqlCommand command = new SqlCommand(query, connection);
                         SqlDataReader reader = command.ExecuteReader();
 
-                        DataGridViewComboBoxCell itemComboBoxCell = (DataGridViewComboBoxCell)dataGridView.Rows[e.RowIndex].Cells["Item"];
+                        DataGridViewComboBoxCell itemComboBoxCell = 
+                            (DataGridViewComboBoxCell)dataGridView.Rows[e.RowIndex].Cells["Item"];
                         itemComboBoxCell.Items.Clear();
 
                         while (reader.Read())
@@ -56,7 +57,9 @@ namespace EOS
 
                     SqlConnection connection1 = ConnectUserStock.GetStockSqlcon();
                     connection1.Open();
-                    string addvalues = $"Select UM, Qty, Price FROM {selectedInventory} WHERE Item = @selectedItem";
+                    string addvalues = 
+                        $"Select UM, Qty, Price FROM {selectedInventory} WHERE Item =" +
+                        $" @selectedItem";
                     SqlCommand addcommand = new SqlCommand(addvalues, connection1);
                     addcommand.Parameters.AddWithValue("@selectedItem", selectedItem);
                     SqlDataReader addReader = addcommand.ExecuteReader();
@@ -75,17 +78,20 @@ namespace EOS
                     addReader.Close();
                     connection1.Close();
 
-                    if (row.Cells["Qty"].Value != null && !string.IsNullOrEmpty(row.Cells["Qty"].Value.ToString()))
+                    if (row.Cells["Qty"].Value != 
+                        null && !string.IsNullOrEmpty(row.Cells["Qty"].Value.ToString()))
                     {
                         qtyCompleted = true;
                     }
 
-                    if (!string.IsNullOrEmpty(selectedInventory) && !string.IsNullOrEmpty(selectedItem) && qtyCompleted)
+                    if (!string.IsNullOrEmpty(selectedInventory) && 
+                        !string.IsNullOrEmpty(selectedItem) && qtyCompleted)
                     {
                         if (qtyCompleted)
                         {
                             if (int.TryParse(row.Cells["Qty"].Value?.ToString(), out int qty) &&
-                                decimal.TryParse(row.Cells["Price"].Value?.ToString(), out decimal price))
+                                decimal.TryParse(row.Cells["Price"].Value?.ToString(), 
+                                out decimal price))
                             {
                                 decimal totalPrice = qty * price;
                                 row.Cells[totalPriceColumnName].Value = totalPrice.ToString();

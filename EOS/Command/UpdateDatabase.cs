@@ -25,8 +25,10 @@ namespace EOS
                         // Get the table name from the "Inventory" column
                         string tableName = row.Cells["Inventory"].Value.ToString();
 
-                        // Prepare your SQL update query to subtract the new quantity from the existing quantity
-                        string updateQuery = $"UPDATE {tableName} SET Qty = Qty - @Qty WHERE Item = '{itemName}'";
+                        // Prepare your SQL update query to subtract the new quantity
+                        // from the existing quantity
+                        string updateQuery = 
+                            $"UPDATE {tableName} SET Qty = Qty - @Qty WHERE Item = '{itemName}'";
 
                         using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                         {
@@ -38,13 +40,16 @@ namespace EOS
                         }
                     }
 
-                    MessageBox.Show("Database updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Database updated successfully!", 
+                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+
             catch (Exception ex)
             {
                 // Handle any exceptions that might occur during the database update
-                MessageBox.Show("Error updating database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error updating database: " + ex.Message, 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

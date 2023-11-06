@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace EOS
@@ -28,8 +21,9 @@ namespace EOS
             string price = insertPricetxtbox.Text;
             decimal valueprice = decimal.Parse(price);
 
-            string query1 = $"INSERT INTO [{tableName}] (Item, UM, Qty, Price, Date) " +
-                            "VALUES (@Item, @UM, @Qty, @Price, @Date)";
+            string query1 = 
+                $"INSERT INTO [{tableName}] (Item, UM, Qty, Price, Date) " +
+                $"VALUES (@Item, @UM, @Qty, @Price, @Date)";
 
             SqlConnection sqlcon = ConnectUserStock.GetStockSqlcon();
 
@@ -39,12 +33,10 @@ namespace EOS
                 command.Parameters.AddWithValue("@UM", insertUnits);
                 command.Parameters.AddWithValue("@Qty", insertQtytxtbox.Text);
                 command.Parameters.AddWithValue("@Price", valueprice);
-
                 DateTime selectedDate = insertDatepicker.Value.Date;
                 SqlParameter param = new SqlParameter("@Date", SqlDbType.Date);
                 param.Value = selectedDate;
                 command.Parameters.Add(param);
-
                 sqlcon.Open();
                 command.ExecuteNonQuery();
             }

@@ -5,6 +5,7 @@ using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.IO;
+
 namespace EOS
 {
     public partial class SignupForm : Form
@@ -55,21 +56,25 @@ namespace EOS
 
         private void signupButton_Click(object sender, EventArgs e)
         {                
-            bool a = signupConfirmpasstxtbox.Text == signupPasstxtbox.Text;                
+            bool a = signupConfirmpasstxtbox.Text == signupPasstxtbox.Text;
+            
             if (a == true)
             {                    
                 bool b = CheckPassword.ValidatePassword(signupPasstxtbox.Text);
+
                 if (b == true)
                 {
                     GetUsername.userSignUp = signupUsertxtbox.Text;
-                    string folderpath = AppDomain.CurrentDomain.BaseDirectory + 
-                        @"Database";
+                    string folderpath = 
+                        AppDomain.CurrentDomain.BaseDirectory + @"Database";
                     if (!Directory.Exists(folderpath))
                     {
                         Directory.CreateDirectory(folderpath);
                     }
+
                     CheckExist checker = new CheckExist();
                     bool c = checker.IsUserDatabaseExists();
+
                     if (!c)
                     {
                         // Create a new SQL connection
@@ -77,15 +82,21 @@ namespace EOS
                         {
                             // Create the database
                             string loginDatabase = "users";
+
                             string userDatabase = GetUsername.userSignUp;
+
                             string loginDatabaseFilePath = 
                                 Path.Combine(folderpath, "users.mdf");
+
                             string userDatabaseFilePath =
                                 Path.Combine(folderpath, $"{userDatabase}.mdf");
+
                             string loginDatabaseLogFilePath = 
                                 Path.Combine(folderpath, "users_log.ldf");
+
                             string userDatabaseLogFilePath =
                                 Path.Combine(folderpath, $"{userDatabase}_log.ldf");
+
                             string createDatabaseQuery =
                                 $"CREATE DATABASE {loginDatabase} ON (NAME = " +
                                 $"'{loginDatabase}', FILENAME = '{loginDatabaseFilePath}') " +
@@ -96,6 +107,7 @@ namespace EOS
                                 $"'{userDatabaseFilePath}') " +
                                 $"LOG ON (NAME = '{userDatabase}_log', FILENAME = " +
                                 $"'{userDatabaseLogFilePath}')";
+
                             using (SqlConnection connection = ConnectSQL.GetSqlcon())
                             {
                                 using (SqlCommand command = 
@@ -105,14 +117,15 @@ namespace EOS
                                     command.ExecuteNonQuery();
                                 }
                             }
+
                             using (SqlConnection userconnection = 
                                 ConnectLogin.GetLoginSqlcon())
                             {
                                 userconnection.Open();
                                 // Create the user login table in the database
                                 string createTableQuery = "CREATE TABLE tbl_Login " +
-                                    "(loginId INT IDENTITY (1,1) PRIMARY KEY, username NVARCHAR(50), " +
-                                    "password NVARCHAR(50))";
+                                    "(loginId INT IDENTITY (1,1) PRIMARY KEY, username " +
+                                    "NVARCHAR(50), password NVARCHAR(50))";
                                 using (SqlCommand createTable =
                                 new SqlCommand(createTableQuery, userconnection))
                                 {
@@ -120,21 +133,24 @@ namespace EOS
                                 }
                             }
                         }
+
                         bool checkuser = checker.IsUserExists();
+
                         if (checkuser)
                         {
-                            MessageBox.Show("That username already exist in " +
-                                "database!");
+                            MessageBox.Show("That username already exist in database!");
                         }
+
                         else
                         {
                             //get password hashed for store in database
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
-                            // Create a new SQL connection to User database
+
                             string insertUser = "INSERT INTO tbl_Login(" +
                                 "username, password) VALUES ('"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
+
                             SqlConnection userSqlCon = ConnectLogin.GetLoginSqlcon();
                             {
                                 SqlCommand command = new SqlCommand(insertUser,
@@ -145,7 +161,7 @@ namespace EOS
                                     userSqlCon.Close();
                                 }
                             }
-                            // Create a new SQL connection to Stock database
+
                             SqlConnection stockSqlCon = ConnectUserStock.GetSignupUserSqlcon();
                             {
                                 // SQL Server connection string
@@ -161,40 +177,47 @@ namespace EOS
                                 // create SQL query to create table
                                 string createStockTable = $"CREATE TABLE " +
                                     $"{tableName} ({columnID} " +
-                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
-                                    $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
+                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50)," +
+                                    $" {columnUM} VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                     $"DECIMAL(10,2), {columnDate} DATE);" +
                                     $"CREATE TABLE " +
                                     $"{tableName2} ({columnID} " +
-                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
-                                    $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
+                                    $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50)," +
+                                    $" {columnUM} VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                     $"DECIMAL(10,2), {columnDate} DATE);";
+
                                 SqlCommand createTableCommand =
                                     new SqlCommand(createStockTable, stockSqlCon);
+
                                 createTableCommand.ExecuteNonQuery();
                                 stockSqlCon.Close();
                             }
+
                             MessageBox.Show("SignIn succesful!");
                             this.Close();
                         }
                     }
+
                     else
                     {
                         bool checkuser = checker.IsUserExists();
+
                         if (checkuser)
                         {
                             MessageBox.Show("That username already exist in " +
                                 "database!");
                         }
+
                         else
                         {
                             //get password hashed for store in database
                             string hashedPassword =
                                 CryptPassword.GetMd5Hash(signupPasstxtbox.Text);
-                            // Create a new SQL connection to User database
+
                             string insertUser = "INSERT INTO tbl_Login(" +
                                 "username, password) VALUES ('"
                                 + signupUsertxtbox.Text + "', '" + hashedPassword + "')";
+
                             SqlConnection userSqlCon = ConnectLogin.GetLoginSqlcon();
                             {
                                 SqlCommand command = new SqlCommand(insertUser,
@@ -205,21 +228,25 @@ namespace EOS
                                     userSqlCon.Close();
                                 }
                             }
-                            // Create a new SQL connection
+
                             using (SqlConnection connectionSql = ConnectSQL.GetSqlcon())
                             {
                                 // Create the database
                                 string userDatabase = GetUsername.userSignUp;
+
                                 string userDatabaseFilePath =
                                     Path.Combine(folderpath, $"{userDatabase}.mdf");
+
                                 string userDatabaseLogFilePath =
                                     Path.Combine(folderpath, $"{userDatabase}_log.ldf");
+
                                 string createDatabaseQuery =
                                     $"CREATE DATABASE {userDatabase} ON (NAME = " +
                                     $"'{userDatabase}', FILENAME = " +
                                     $"'{userDatabaseFilePath}') " +
                                     $"LOG ON (NAME = '{userDatabase}_log', FILENAME = " +
                                     $"'{userDatabaseLogFilePath}')";
+
                                 using (SqlConnection connection = ConnectSQL.GetSqlcon())
                                 {
                                     using (SqlCommand command =
@@ -229,8 +256,10 @@ namespace EOS
                                         command.ExecuteNonQuery();
                                     }
                                 }
+
                                 // Create a new SQL connection to Stock database
-                                SqlConnection stockSqlCon = ConnectUserStock.GetSignupUserSqlcon();
+                                SqlConnection stockSqlCon = 
+                                    ConnectUserStock.GetSignupUserSqlcon();
                                 {
                                     // SQL Server connection string
                                     stockSqlCon.Open();
@@ -245,30 +274,37 @@ namespace EOS
                                     // create SQL query to create table
                                     string createStockTable = $"CREATE TABLE " +
                                         $"{tableName} ({columnID} " +
-                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} " +
+                                        $"VARCHAR(50), {columnUM} " +
                                         $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                         $"DECIMAL(10,2), {columnDate} DATE);" +
                                         $"CREATE TABLE " +
                                         $"{tableName2} ({columnID} " +
-                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} VARCHAR(50), {columnUM} " +
+                                        $"INT IDENTITY(1,1) PRIMARY KEY, {columnItem} " +
+                                        $"VARCHAR(50), {columnUM} " +
                                         $"VARCHAR(10), {columnQty} INT, {columnPrice} " +
                                         $"DECIMAL(10,2), {columnDate} DATE);";
+
                                     SqlCommand createTableCommand =
                                         new SqlCommand(createStockTable, stockSqlCon);
+
                                     createTableCommand.ExecuteNonQuery();
                                     stockSqlCon.Close();
                                 }
                             }
+
                             MessageBox.Show("SignIn succesful!");
                             this.Close();
                         }
                     }
-                }                    
+                } 
+                
                 else
                 {
                     MessageBox.Show("Invalid password syntax!");
                 }
             }
+
             else            
             {            
                 MessageBox.Show("The passwords doesn't match.");   
@@ -288,6 +324,7 @@ namespace EOS
                 signupPasstxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
+
             else
             {
                 signupPasstxtbox.PasswordChar = '*'; 
@@ -302,6 +339,7 @@ namespace EOS
                 signupConfirmpasstxtbox.PasswordChar = '\0';
                 // show password in plain text
             }
+
             else
             {
                 signupConfirmpasstxtbox.PasswordChar = '*';

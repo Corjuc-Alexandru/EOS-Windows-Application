@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace EOS
@@ -21,7 +20,6 @@ namespace EOS
             }
             //Show what user is logged in
             label1.Text = "Logged in as " + GetUsername.Userloggedname;
-
         }
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -37,13 +35,13 @@ namespace EOS
                 // The form is already open, bring it to the front
                 Application.OpenForms.OfType<InsertStockForm>().First().BringToFront();
             }
+
             else
             {
                 // The form is not open, create a new instance of it
                 InsertStockForm insertStock = new InsertStockForm();
                 insertStock.Show();
             }
-
         }
 
         private void accountSettingsToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -54,6 +52,7 @@ namespace EOS
                 // The form is already open, bring it to the front
                 Application.OpenForms.OfType<ChangePassForm>().First().BringToFront();
             }
+
             else
             {
                 // The form is not open, create a new instance of it
@@ -70,6 +69,7 @@ namespace EOS
                 // The form is already open, bring it to the front
                 Application.OpenForms.OfType<StocksForm>().First().BringToFront();
             }
+
             else
             {
                 // The form is not open, create a new instance of it
@@ -91,6 +91,7 @@ namespace EOS
                 // The form is already open, bring it to the front
                 Application.OpenForms.OfType<DeleteAccountForm>().First().BringToFront();
             }
+
             else
             {
                 // The form is not open, create a new instance of it
@@ -107,6 +108,7 @@ namespace EOS
                 // The form is already open, bring it to the front
                 Application.OpenForms.OfType<EditStockForm>().First().BringToFront();
             }
+
             else
             {
                 // The form is not open, create a new instance of it

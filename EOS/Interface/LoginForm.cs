@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
 
 namespace EOS
 {
@@ -52,18 +50,20 @@ namespace EOS
             string hashedInputPassword = CryptPassword.GetMd5Hash(inputPassword);
             //create instanace of database connection
             SqlConnection sqlcon1 = ConnectLogin.GetLoginSqlcon();
-            string querry = "Select * from tbl_Login Where username = '" 
-                + loginUsertxtbox.Text + "' and password = '" 
-                + hashedInputPassword + "'";
+            string querry = 
+                "Select * from tbl_Login Where username = '" + loginUsertxtbox.Text + "' " +
+                "and password = '" + hashedInputPassword + "'";
             SqlDataAdapter sda = new SqlDataAdapter(querry, sqlcon1);
             DataTable dtbl = new DataTable();
             sda.Fill(dtbl);
+
             if (dtbl.Rows.Count == 1)
             {
                 GetUsername.Userloggedname = loginUsertxtbox.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+
             else
             {
                 MessageBox.Show("wrong user or password");
@@ -77,6 +77,7 @@ namespace EOS
                 loginPasswordtxtbox.PasswordChar = '\0'; 
                 // show password in plain text
             }
+
             else
             {
                 loginPasswordtxtbox.PasswordChar = '*'; 
@@ -84,8 +85,7 @@ namespace EOS
             }
         }
 
-        private void linkLabel1_LinkClicked_1(object sender, 
-            LinkLabelLinkClickedEventArgs e)
+        private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ForgotForm forgotForm = new ForgotForm();
             forgotForm.ShowDialog();
